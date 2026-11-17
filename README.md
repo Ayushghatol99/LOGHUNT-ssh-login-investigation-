@@ -1,6 +1,6 @@
 # LogHunt: SOC Investigation of Suspicious SSH Logins
 
-A beginner-friendly blue-team project. I investigated a day of SSH authentication logs, separated real attacks from normal activity, and wrote an incident report.
+ I investigated a day of SSH authentication logs, separated real attacks from normal activity, and wrote an incident report.
 
 > **All data here is synthetic.** Hostnames, usernames and IP addresses are for my pratice (`192.0.2.x`, `198.51.100.x`, `203.0.113.x`) or private `10.x` space. No real systems, credentials or personal logs are included.
 
