@@ -1,0 +1,108 @@
+ PHASE 1: UNDERSTANDING OF LOGS 
+
+## Number of lines in the log
+138 logs/auth.log
+
+## First 5 entries
+Oct 12 02:14:03 web-srv-01 sshd[36242]: Failed password for root from 198.51.100.23 port 54088 ssh2
+Oct 12 02:14:07 web-srv-01 sshd[23074]: Failed password for root from 198.51.100.23 port 64283 ssh2
+Oct 12 02:14:10 web-srv-01 sshd[10003]: Failed password for root from 198.51.100.23 port 41833 ssh2
+Oct 12 02:14:15 web-srv-01 sshd[31103]: Failed password for root from 198.51.100.23 port 51380 ssh2
+Oct 12 02:14:20 web-srv-01 sshd[11339]: Failed password for root from 198.51.100.23 port 42241 ssh2
+
+## Last 3 entries
+Oct 12 17:29:38 web-srv-01 sshd[19027]: Accepted password for rkhan from 10.10.5.47 port 46585 ssh2
+Oct 12 17:29:57 web-srv-01 sshd[11131]: Accepted password for dokafor from 10.10.7.9 port 64647 ssh2
+Oct 12 17:50:14 web-srv-01 sshd[38684]: Accepted password for lbrown from 10.10.6.18 port 58199 ssh2
+
+## Failed logins (count)
+111
+
+## Successful logins (count)
+23
+
+
+ PHASE 2: SUSPICIOUS ACTIVITY 
+
+## Failed logins per IP
+     60 from 198.51.100.23
+     38 from 192.0.2.88
+      9 from 203.0.113.45
+      2 from 10.10.7.9
+      1 from 10.10.6.18
+      1 from 10.10.5.60
+
+## All activity from spray IP 203.0.113.45
+Oct 12 09:40:12 web-srv-01 sshd[13556]: Failed password for asharma from 203.0.113.45 port 49806 ssh2
+Oct 12 09:40:43 web-srv-01 sshd[16710]: Failed password for mpatel from 203.0.113.45 port 45142 ssh2
+Oct 12 09:41:14 web-srv-01 sshd[38673]: Failed password for rkhan from 203.0.113.45 port 43491 ssh2
+Oct 12 09:41:41 web-srv-01 sshd[39479]: Failed password for tnguyen from 203.0.113.45 port 45225 ssh2
+Oct 12 09:42:18 web-srv-01 sshd[14757]: Failed password for lbrown from 203.0.113.45 port 58922 ssh2
+Oct 12 09:42:50 web-srv-01 sshd[33084]: Failed password for dokafor from 203.0.113.45 port 41929 ssh2
+Oct 12 09:43:28 web-srv-01 sshd[32911]: Failed password for jsmith from 203.0.113.45 port 47452 ssh2
+Oct 12 09:44:06 web-srv-01 sshd[15344]: Failed password for invalid user svc-backup from 203.0.113.45 port 50757 ssh2
+Oct 12 09:44:45 web-srv-01 sshd[14977]: Failed password for invalid user hr-portal from 203.0.113.45 port 55502 ssh2
+
+## Successful logins from brute-force IP 198.51.100.23
+0
+
+## Successful logins from spray IP 203.0.113.45
+0
+
+
+ PHASE 3: INCIDENT INVESTIGATION 
+
+## Successful logins from outside the company network
+Oct 12 14:06:27 web-srv-01 sshd[32569]: Accepted password for jsmith from 192.0.2.88 port 41259 ssh2
+
+## All activity from 192.0.2.88
+Oct 12 14:03:41 web-srv-01 sshd[26882]: Failed password for jsmith from 192.0.2.88 port 42420 ssh2
+Oct 12 14:03:44 web-srv-01 sshd[23836]: Failed password for jsmith from 192.0.2.88 port 42216 ssh2
+Oct 12 14:03:48 web-srv-01 sshd[30364]: Failed password for jsmith from 192.0.2.88 port 51826 ssh2
+Oct 12 14:03:53 web-srv-01 sshd[27206]: Failed password for jsmith from 192.0.2.88 port 59015 ssh2
+Oct 12 14:03:59 web-srv-01 sshd[28751]: Failed password for jsmith from 192.0.2.88 port 40907 ssh2
+Oct 12 14:04:02 web-srv-01 sshd[22403]: Failed password for jsmith from 192.0.2.88 port 62252 ssh2
+Oct 12 14:04:06 web-srv-01 sshd[33937]: Failed password for jsmith from 192.0.2.88 port 41939 ssh2
+Oct 12 14:04:09 web-srv-01 sshd[23227]: Failed password for jsmith from 192.0.2.88 port 61365 ssh2
+Oct 12 14:04:15 web-srv-01 sshd[12969]: Failed password for jsmith from 192.0.2.88 port 49120 ssh2
+Oct 12 14:04:20 web-srv-01 sshd[16540]: Failed password for jsmith from 192.0.2.88 port 45109 ssh2
+Oct 12 14:04:23 web-srv-01 sshd[36608]: Failed password for jsmith from 192.0.2.88 port 53576 ssh2
+Oct 12 14:04:28 web-srv-01 sshd[16063]: Failed password for jsmith from 192.0.2.88 port 55932 ssh2
+Oct 12 14:04:33 web-srv-01 sshd[33484]: Failed password for jsmith from 192.0.2.88 port 41267 ssh2
+Oct 12 14:04:38 web-srv-01 sshd[37278]: Failed password for jsmith from 192.0.2.88 port 40422 ssh2
+Oct 12 14:04:41 web-srv-01 sshd[21808]: Failed password for jsmith from 192.0.2.88 port 42922 ssh2
+Oct 12 14:04:44 web-srv-01 sshd[33375]: Failed password for jsmith from 192.0.2.88 port 64963 ssh2
+Oct 12 14:04:49 web-srv-01 sshd[17096]: Failed password for jsmith from 192.0.2.88 port 54288 ssh2
+Oct 12 14:04:55 web-srv-01 sshd[32984]: Failed password for jsmith from 192.0.2.88 port 53015 ssh2
+Oct 12 14:05:01 web-srv-01 sshd[27377]: Failed password for jsmith from 192.0.2.88 port 45692 ssh2
+Oct 12 14:05:04 web-srv-01 sshd[31689]: Failed password for jsmith from 192.0.2.88 port 56277 ssh2
+Oct 12 14:05:08 web-srv-01 sshd[39813]: Failed password for jsmith from 192.0.2.88 port 46210 ssh2
+Oct 12 14:05:11 web-srv-01 sshd[11860]: Failed password for jsmith from 192.0.2.88 port 53928 ssh2
+Oct 12 14:05:15 web-srv-01 sshd[33725]: Failed password for jsmith from 192.0.2.88 port 42887 ssh2
+Oct 12 14:05:19 web-srv-01 sshd[17943]: Failed password for jsmith from 192.0.2.88 port 53693 ssh2
+Oct 12 14:05:23 web-srv-01 sshd[13290]: Failed password for jsmith from 192.0.2.88 port 59757 ssh2
+Oct 12 14:05:26 web-srv-01 sshd[19700]: Failed password for jsmith from 192.0.2.88 port 47323 ssh2
+Oct 12 14:05:30 web-srv-01 sshd[28217]: Failed password for jsmith from 192.0.2.88 port 54313 ssh2
+Oct 12 14:05:33 web-srv-01 sshd[20385]: Failed password for jsmith from 192.0.2.88 port 53930 ssh2
+Oct 12 14:05:38 web-srv-01 sshd[19383]: Failed password for jsmith from 192.0.2.88 port 43417 ssh2
+Oct 12 14:05:43 web-srv-01 sshd[20623]: Failed password for jsmith from 192.0.2.88 port 49224 ssh2
+Oct 12 14:05:46 web-srv-01 sshd[38689]: Failed password for jsmith from 192.0.2.88 port 63250 ssh2
+Oct 12 14:05:52 web-srv-01 sshd[19530]: Failed password for jsmith from 192.0.2.88 port 52018 ssh2
+Oct 12 14:05:57 web-srv-01 sshd[39985]: Failed password for jsmith from 192.0.2.88 port 40809 ssh2
+Oct 12 14:06:02 web-srv-01 sshd[11418]: Failed password for jsmith from 192.0.2.88 port 59152 ssh2
+Oct 12 14:06:07 web-srv-01 sshd[18342]: Failed password for jsmith from 192.0.2.88 port 62892 ssh2
+Oct 12 14:06:11 web-srv-01 sshd[23777]: Failed password for jsmith from 192.0.2.88 port 43391 ssh2
+Oct 12 14:06:14 web-srv-01 sshd[20505]: Failed password for jsmith from 192.0.2.88 port 62832 ssh2
+Oct 12 14:06:17 web-srv-01 sshd[21151]: Failed password for jsmith from 192.0.2.88 port 53178 ssh2
+Oct 12 14:06:27 web-srv-01 sshd[32569]: Accepted password for jsmith from 192.0.2.88 port 41259 ssh2
+
+## Session and sudo activity
+Oct 12 14:06:36 web-srv-01 sshd[12912]: pam_unix(sshd:session): session opened for user jsmith by (uid=0)
+Oct 12 14:07:19 web-srv-01 sudo[31045]: pam_unix(sudo:auth): authentication failure; logname=jsmith uid=1004 euid=0 tty=/dev/pts/0 ruser=jsmith rhost= user=jsmith
+Oct 12 14:07:28 web-srv-01 sudo[39497]: sudo: jsmith : 3 incorrect password attempts ; TTY=pts/0 ; PWD=/home/jsmith ; USER=root ; COMMAND=/bin/bash
+Oct 12 14:12:27 web-srv-01 sshd[27728]: pam_unix(sshd:session): session closed for user jsmith
+
+## jsmith successful logins
+Oct 12 10:27:22 web-srv-01 sshd[11432]: Accepted password for jsmith from 10.10.5.60 port 41404 ssh2
+Oct 12 13:52:05 web-srv-01 sshd[12062]: Accepted password for jsmith from 10.10.5.60 port 58171 ssh2
+Oct 12 14:06:27 web-srv-01 sshd[32569]: Accepted password for jsmith from 192.0.2.88 port 41259 ssh2

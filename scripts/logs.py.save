@@ -1,0 +1,42 @@
+import random
+from datetime import datetime, timedelta
+
+random.seed(1337)
+
+HOST = "web-srv-01"
+LINES = []
+
+def add(ts, msg):
+    LINES.append((ts, msg))
+
+DAY = datetime(2026, 10, 12, 0, 0, 0)
+
+def port():
+ return random.randint(40000, 65000)
+
+def failed(ts, user, ip):
+    add(ts, f"Failed password for {user} from {ip} port {port()} ssh2")
+
+def accepted(ts, user, ip):
+    add(ts, f"Accepted password for {user} from {ip} port {port()} ssh2")
+
+EMPLOYEES = {
+    "asharma": "10.10.5.21",
+    "mpatel":  "10.10.5.34",
+    "rkhan":   "10.10.5.47",
+    "tnguyen": "10.10.6.12",
+    "lbrown":  "10.10.6.18",
+    "dokafor": "10.10.7.9",
+    "jsmith":  "10.10.5.60",
+}
+
+for user, ip in EMPLOYEES.items():
+    for _ in range(random.randint(2, 4)):
+        t = DAY + timedelta(hours=random.randint(8, 17),
+                            minutes=random.randint(0, 59),
+                            seconds=random.randint(0, 59))
+        if random.random() < 0.25:
+            failed(t - timedelta(seconds=random.randint(5, 20)), user, ip)
+        accepted(t, user, ip)
+
+print(len(LINES), "entries so far")
